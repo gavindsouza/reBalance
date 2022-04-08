@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include rebalance *.css
+recursive-include rebalance *.csv
+recursive-include rebalance *.html
+recursive-include rebalance *.ico
+recursive-include rebalance *.js
+recursive-include rebalance *.json
+recursive-include rebalance *.md
+recursive-include rebalance *.png
+recursive-include rebalance *.py
+recursive-include rebalance *.svg
+recursive-include rebalance *.txt
+recursive-exclude rebalance *.pyc
