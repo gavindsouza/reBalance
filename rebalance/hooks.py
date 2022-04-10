@@ -2,7 +2,7 @@ from . import __version__ as app_version
 
 app_name = "rebalance"
 app_title = "reBalance"
-app_publisher = "Gavin D\'souza"
+app_publisher = "Gavin D'souza"
 app_description = "reBalance life"
 app_icon = "octicon octicon-file-directory"
 app_color = "orange"
@@ -44,7 +44,7 @@ app_license = "MIT"
 
 # website user home page (by Role)
 # role_home_page = {
-#	"Role": "home_page"
+# 	"Role": "home_page"
 # }
 
 # Generators
@@ -109,7 +109,7 @@ app_license = "MIT"
 # 		"on_update": "method",
 # 		"on_cancel": "method",
 # 		"on_trash": "method"
-#	}
+# 	}
 # }
 
 # Scheduled Tasks
