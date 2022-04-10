@@ -8,12 +8,12 @@
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint .",
-		"dev": "cd frontend && yarn dev",
-		"watch": "yarn dev",
-		"build": "NODE_ENV=production yarn run build-app",
-		"build-app": "cd frontend && yarn build",
-		"postinstall": "cd frontend && yarn install"
-	},
+    "dev": "cd frontend && yarn dev",
+    "watch": "yarn dev",
+    "build": "NODE_ENV=production yarn run build-app",
+    "build-app": "cd frontend && yarn build",
+    "postinstall": "cd frontend && yarn install"
+  },
   "dependencies": {
     "react": "17.0.2",
     "react-native": "0.68.0"

@@ -64,3 +64,8 @@ buck-out/
 *.pyc
 __pycache__
 *.egg-info
+
+# Dashboard
+*/www/rebalance.html
+*/public/frontend/assets
+*/public/frontend/index.html
