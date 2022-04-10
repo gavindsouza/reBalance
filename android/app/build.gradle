@@ -277,6 +277,15 @@ dependencies {
     } else {
         implementation jscFlavor
     }
+
+    // via https://square.github.io/okhttp/
+    implementation("com.squareup.okhttp3:okhttp:4.9.3")
+    implementation(platform("com.squareup.okhttp3:okhttp-bom:4.9.3"))
+    implementation("com.squareup.okhttp3:okhttp")
+    implementation("com.squareup.okhttp3:logging-interceptor")
+
+    // gjson
+    implementation 'com.google.code.gson:gson:2.9.0'
 }
 
 if (isNewArchitectureEnabled()) {
