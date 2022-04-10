@@ -1,7 +1,7 @@
 ## reBalance
 
-reBalance life
+This project consists of a React Native & a Frappe app.
 
 #### License
 
-MIT
+Unlicensed. Will set one upon completion of first draft.
