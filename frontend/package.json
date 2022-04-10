@@ -3,10 +3,10 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build --base=/assets/rebalance/frontend && yarn copy-html-entry",
+    "dev": "npx -y vite",
+    "build": "npx -y vite build --base=/assets/rebalance/frontend && yarn copy-html-entry",
     "copy-html-entry": "cp ../rebalance/public/frontend/index.html ../rebalance/www/rebalance.html",
-    "preview": "vite preview"
+    "preview": "npx -y vite preview"
   },
   "dependencies": {
     "feather-icons": "^4.28.0",
