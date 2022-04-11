@@ -222,6 +222,7 @@ android {
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
+            buildConfigField "Boolean", "DEBUG_MODE", "true"
         }
         release {
             // Caution! In production, you need to generate your own keystore file.
@@ -229,6 +230,7 @@ android {
             signingConfig signingConfigs.debug
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            buildConfigField "Boolean", "DEBUG_MODE", "false"
         }
     }
 

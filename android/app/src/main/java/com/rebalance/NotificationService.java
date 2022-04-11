@@ -20,7 +20,7 @@ import android.content.pm.PackageManager;
 
 public class NotificationService extends NotificationListenerService {
     Context context;
-    String titleData="";
+    String SERVER_URL;
 
     @Override
     public void onCreate() {
@@ -29,12 +29,17 @@ public class NotificationService extends NotificationListenerService {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
+        if (BuildConfig.DEBUG_MODE) {
+            SERVER_URL = "silent-duck-89.loca.lt"; // change this as per your dev server
+        } else {
+            SERVER_URL = "rebalance.frappe.cloud";
+        }
+        System.out.println("SERVER_URL: " + SERVER_URL);
         super.onCreate();
         context = getApplicationContext();
     }
 
-    @Override
-    public void onNotificationPosted(StatusBarNotification sbn) {
+    public void syncServerNotification(StatusBarNotification sbn, String URL) {
         String packageName = sbn.getPackageName();
         PackageManager packageManager = context.getPackageManager();
         Notification notification = sbn.getNotification();
@@ -61,59 +66,28 @@ public class NotificationService extends NotificationListenerService {
 
         String jsonBody = gson.toJson(msg);
         Request request = new Request.Builder()
-            // .url("https://rebalance.frappe.cloud/api/method/rebalance.api.add")
-            .url("https://silent-duck-89.loca.lt/api/method/rebalance.api.add")
+            .url(URL)
             .post(RequestBody.create(MEDIA_TYPE_JSON, jsonBody))
             .build();
 
         try {
             Response response = client.newCall(request).execute();
-            // System.out.println(response.body().string());
             if (!response.isSuccessful()) {
                 throw new IOException("Unexpected code " + response);
             }
         } catch (IOException e) {};
+
+    }
+
+    @Override
+    public void onNotificationPosted(StatusBarNotification sbn) {
+        String URL = String.format("https://%s/api/method/rebalance.api.add", SERVER_URL);
+        syncServerNotification(sbn, URL);
     }
 
     @Override
     public void onNotificationRemoved(StatusBarNotification sbn) {
-        String packageName = sbn.getPackageName();
-        PackageManager packageManager = context.getPackageManager();
-        Notification notification = sbn.getNotification();
-        Bundle extras = notification.extras;
-        Hashtable<String, Object> msg = new Hashtable<>();
-
-        MediaType MEDIA_TYPE_JSON = MediaType.get("application/json; charset=utf-8");
-        OkHttpClient client = new OkHttpClient();
-        Gson gson = new Gson();
-
-        try {
-            String appName = (String) packageManager.getApplicationLabel(
-                packageManager.getApplicationInfo(packageName, PackageManager.GET_META_DATA)
-            );
-            msg.put("app", appName);
-        } catch (PackageManager.NameNotFoundException e) {}
-        msg.put("package", packageName);
-        msg.put("title", extras.getString("android.title"));
-        msg.put("text", extras.getString("android.text"));
-        msg.put("id", String.valueOf(sbn.getId()));
-        msg.put("post_time", String.valueOf(sbn.getPostTime()));
-        msg.put("tag", sbn.getTag());
-        msg.put("user", sbn.getUser().toString());
-
-        String jsonBody = gson.toJson(msg);
-        Request request = new Request.Builder()
-            // .url("https://rebalance.frappe.cloud/api/method/rebalance.api.remove")
-            .url("https://silent-duck-89.loca.lt/api/method/rebalance.api.remove")
-            .post(RequestBody.create(MEDIA_TYPE_JSON, jsonBody))
-            .build();
-
-        try {
-            Response response = client.newCall(request).execute();
-            // System.out.println(response.body().string());
-            if (!response.isSuccessful()) {
-                throw new IOException("Unexpected code " + response);
-            }
-        } catch (IOException e) {};
+        String URL = String.format("https://%s/api/method/rebalance.api.remove", SERVER_URL);
+        syncServerNotification(sbn, URL);
     }
 }
