@@ -96,7 +96,6 @@ export default {
   mounted() {
     this.timer = setInterval(this.fetchNotifications, 60_000);
     this.fetchNotifications();
-    this.countDownTimer();
   },
   methods: {
     async fetchNotifications() {
@@ -105,12 +104,13 @@ export default {
       this.forums = await this.$call('rebalance.api.get', {category: 'Forums'});
       this.promos = await this.$call('rebalance.api.get', {category: 'Promotions'});
       this.countDown = 60;
+      this.countDownTimer();
     },
     fetch_subtitle() {
       if (this.countDown == 0) {
         return `Refreshing dashboard...`;
-      } else if (this.countDown >= 25) {
-        return `Dashboard refreshed`;
+      } else if (this.countDown >= 50) {
+        return 'Dashboard refreshed';
       } else {
         return `Last refresh ${ 60 - this.countDown } seconds ago`;
       }
@@ -124,9 +124,9 @@ export default {
     countDownTimer() {
       if (this.countDown > 0) {
           setTimeout(() => {
-              this.countDown -= 5
+              this.countDown -= 10
               this.countDownTimer()
-          }, 5000)
+          }, 10_000)
       }
     }
   },
