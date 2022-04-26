@@ -27,11 +27,8 @@ emoji=true
 
 exact_by_default=true
 
-format.bracket_spacing=false
-
 module.file_ext=.js
 module.file_ext=.json
-module.file_ext=.ios.js
 
 munge_underscores=true
 
@@ -64,4 +61,4 @@ untyped-import
 untyped-type-import
 
 [version]
-^0.170.0
+^0.110.1
